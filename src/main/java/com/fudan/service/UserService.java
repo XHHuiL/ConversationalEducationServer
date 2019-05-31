@@ -1,19 +1,23 @@
 package com.fudan.service;
 
 
+import com.fudan.dao.UserDao;
 import com.fudan.entity.User;
-import com.fudan.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
 
+    private final UserDao userDao;
+
     @Autowired
-    private UserMapper userMapper;
+    public UserService(UserDao userDao) {
+        this.userDao = userDao;
+    }
 
     public User getUserById(Integer id){
-        return userMapper.selectByPrimaryKey(id);
+        return userDao.selectByPrimaryKey(id);
     }
 
 }

@@ -3,11 +3,10 @@ server:
 
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/adweb-lab3?serverTimezone=GMT%2B8
-    username: root
-    password: good2739966538
+    url: jdbc:mysql://192.168.1.102:3306/webpj?serverTimezone=GMT%2B8
+    username: liuhui
+    password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
 
 mybatis:
-  type-aliases-package: com.fudan.entity
-  mapper-locations: classpath*:mapper/*.xml
+  mapper-locations: mapper/*.xml
