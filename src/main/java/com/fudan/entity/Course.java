@@ -2,10 +2,7 @@ package com.fudan.entity;
 
 import java.io.Serializable;
 
-/**
- * course
- * @author 
- */
+
 public class Course implements Serializable {
     private Integer id;
 

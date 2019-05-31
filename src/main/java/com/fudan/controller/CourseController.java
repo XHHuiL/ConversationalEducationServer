@@ -7,7 +7,6 @@ import com.fudan.util.ConvertEntityToResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -22,15 +21,25 @@ public class CourseController {
         this.courseService = courseService;
     }
 
-
     @GetMapping(value = "/all")
     public List<CourseResponse> allCourses(){
-        List<Course> courses = courseService.getCourses();
-        List<CourseResponse> courseResponses = new ArrayList<>();
-        for (Course course : courses) {
-            courseResponses.add(ConvertEntityToResponse.convertCourse(course));
-        }
-        return courseResponses;
+        return ConvertEntityToResponse.convertCourseList(courseService.getCourses());
+    }
+
+    @GetMapping(value = "/selected/{userId}")
+    public List<CourseResponse> selectedCourses(@PathVariable String userId){
+        return ConvertEntityToResponse.convertCourseList(courseService.getSelectedCourses(userId));
+    }
+
+    @GetMapping(value = "/unselected/{userId}")
+    public List<CourseResponse> unselectedCourses(@PathVariable String userId){
+        return ConvertEntityToResponse.convertCourseList(courseService.getUnselectedCourses(userId));
+    }
+
+    @PutMapping(value = "/{id}")
+    public void updateCourse(@PathVariable int id, @RequestBody Course course){
+        System.out.println(course.getTeacherId());
+        courseService.update(course);
     }
 
 }

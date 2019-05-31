@@ -29,14 +29,15 @@ public class UserController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public LoginResponse login(@RequestBody LoginRequest request) throws IOException {
         if (request.getCode() == null || request.getCode().length() == 0) {
-            return new LoginResponse(-1, "code should not be empty", null);
+            return new LoginResponse(-1, "code should not be empty", null, null, null);
         }
         JSONObject json = httpClientService.getOpenId(UrlBuilder.urlForAppId(request.getCode()));
         if (json == null) {
-            return new LoginResponse(-1, "can't getOpenId openid", null);
+            return new LoginResponse(-1, "can't getOpenId openid", null, null, null);
         }
         JSONObject tokenJson = httpClientService.getToken(json.toString());
-        return new LoginResponse(1, "login success", (String) tokenJson.get("token"));
+        return new LoginResponse(1, "login success",
+                (String) tokenJson.get("token"), (String) json.get("openid"), (String) json.get("session_key"));
     }
 
 }

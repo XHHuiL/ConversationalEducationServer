@@ -13,12 +13,23 @@ public class CourseService {
 
     private final CourseDao courseDao;
 
-
     public CourseService(CourseDao courseDao) {
         this.courseDao = courseDao;
     }
 
-    public List<Course> getCourses(){
+    public List<Course> getCourses() {
         return courseDao.selectByExample(new CourseExample());
+    }
+
+    public List<Course> getSelectedCourses(String userId) {
+        return courseDao.selectedCourses(userId);
+    }
+
+    public List<Course> getUnselectedCourses(String userId) {
+        return courseDao.unselectedCourses(userId);
+    }
+
+    public void update(Course course) {
+        courseDao.updateByPrimaryKeySelective(course);
     }
 }

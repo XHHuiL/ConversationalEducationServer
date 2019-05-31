@@ -32,4 +32,8 @@ public interface CourseDao {
     int updateByPrimaryKeySelective(Course record);
 
     int updateByPrimaryKey(Course record);
+
+    List<Course> selectedCourses(String userId);
+
+    List<Course> unselectedCourses(String userId);
 }
