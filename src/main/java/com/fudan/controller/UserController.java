@@ -27,7 +27,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public LoginResponse authenticate(@RequestBody LoginRequest request) throws IOException {
+    public LoginResponse login(@RequestBody LoginRequest request) throws IOException {
         if (request.getCode() == null || request.getCode().length() == 0) {
             return new LoginResponse(-1, "code should not be empty", null);
         }
