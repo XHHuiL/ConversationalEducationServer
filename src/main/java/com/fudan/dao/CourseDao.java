@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
+
 @Component
 @Mapper
 public interface CourseDao {
@@ -36,4 +37,6 @@ public interface CourseDao {
     List<Course> selectedCourses(String userId);
 
     List<Course> unselectedCourses(String userId);
+
+    List<Course> offeredCourses(String teacherId);
 }

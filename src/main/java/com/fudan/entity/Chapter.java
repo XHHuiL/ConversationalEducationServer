@@ -3,17 +3,17 @@ package com.fudan.entity;
 import java.io.Serializable;
 
 /**
- * course
+ * chapter
  * @author 
  */
-public class Course implements Serializable {
+public class Chapter implements Serializable {
     private Integer id;
 
     private String name;
 
-    private String teacherId;
+    private Integer courseId;
 
-    private String image;
+    private Integer firstContent;
 
     private static final long serialVersionUID = 1L;
 
@@ -33,20 +33,20 @@ public class Course implements Serializable {
         this.name = name;
     }
 
-    public String getTeacherId() {
-        return teacherId;
+    public Integer getCourseId() {
+        return courseId;
     }
 
-    public void setTeacherId(String teacherId) {
-        this.teacherId = teacherId;
+    public void setCourseId(Integer courseId) {
+        this.courseId = courseId;
     }
 
-    public String getImage() {
-        return image;
+    public Integer getFirstContent() {
+        return firstContent;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setFirstContent(Integer firstContent) {
+        this.firstContent = firstContent;
     }
 
     @Override
@@ -60,11 +60,11 @@ public class Course implements Serializable {
         if (getClass() != that.getClass()) {
             return false;
         }
-        Course other = (Course) that;
+        Chapter other = (Chapter) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
-            && (this.getTeacherId() == null ? other.getTeacherId() == null : this.getTeacherId().equals(other.getTeacherId()))
-            && (this.getImage() == null ? other.getImage() == null : this.getImage().equals(other.getImage()));
+            && (this.getCourseId() == null ? other.getCourseId() == null : this.getCourseId().equals(other.getCourseId()))
+            && (this.getFirstContent() == null ? other.getFirstContent() == null : this.getFirstContent().equals(other.getFirstContent()));
     }
 
     @Override
@@ -73,8 +73,8 @@ public class Course implements Serializable {
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
-        result = prime * result + ((getTeacherId() == null) ? 0 : getTeacherId().hashCode());
-        result = prime * result + ((getImage() == null) ? 0 : getImage().hashCode());
+        result = prime * result + ((getCourseId() == null) ? 0 : getCourseId().hashCode());
+        result = prime * result + ((getFirstContent() == null) ? 0 : getFirstContent().hashCode());
         return result;
     }
 
@@ -86,8 +86,8 @@ public class Course implements Serializable {
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
         sb.append(", name=").append(name);
-        sb.append(", teacherId=").append(teacherId);
-        sb.append(", image=").append(image);
+        sb.append(", courseId=").append(courseId);
+        sb.append(", firstContent=").append(firstContent);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

@@ -16,8 +16,19 @@ public class UserService {
         this.userDao = userDao;
     }
 
-    public User getUserById(Integer id){
+    public User getUserById(Integer id) {
         return userDao.selectByPrimaryKey(id);
     }
 
+    public User getUserByUUID(String uuid) {
+        return userDao.selectByUUID(uuid);
+    }
+
+    public String getHeadSculpture(String id) {
+        return userDao.selectByUUID(id).getHeadSculpture();
+    }
+
+    public void update(User user) {
+        userDao.updateByPrimaryKeySelective(user);
+    }
 }

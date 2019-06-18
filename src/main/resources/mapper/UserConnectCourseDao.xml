@@ -95,6 +95,16 @@
     from user_connect_course
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectByUserIdAndCourseId" parameterType="com.fudan.entity.UserConnectCourse" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user_connect_course
+    where user_id = #{userId,jdbcType=VARCHAR} and course_id = #{courseId,jdbcType=INTEGER}
+  </select>
+  <select id="deleteByUserIdAndCourseId" parameterType="com.fudan.entity.UserConnectCourse">
+    delete from user_connect_course
+    where user_id = #{userId,jdbcType=VARCHAR} and course_id = #{courseId,jdbcType=INTEGER}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from user_connect_course
     where id = #{id,jdbcType=INTEGER}

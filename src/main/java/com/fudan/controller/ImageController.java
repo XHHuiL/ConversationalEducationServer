@@ -9,10 +9,10 @@ import java.io.IOException;
 
 
 @RestController
-@RequestMapping(value = "/assets/images")
+//@RequestMapping(value = "/assets/images")
 public class ImageController {
 
-    @GetMapping(value = "course/{fileName}", produces = MediaType.IMAGE_JPEG_VALUE)
+//    @GetMapping(value = "course/{fileName}", produces = MediaType.IMAGE_JPEG_VALUE)
     public byte[] getCourseImage(@PathVariable String fileName) throws IOException {
         String path = "C:/Users/Administrator/Desktop/高级web/service/assets/images/course/" + fileName;
         FileInputStream input = new FileInputStream(new File(path));

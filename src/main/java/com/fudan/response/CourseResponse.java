@@ -4,11 +4,11 @@ package com.fudan.response;
 public class CourseResponse {
     private int id;
     private String name;
-    private int teacher_id;
+    private String teacher_id;
     private String image;
     private int student_num;
 
-    public CourseResponse(int id, String name, int teacher_id, String image, int student_num) {
+    public CourseResponse(int id, String name, String teacher_id, String image, int student_num) {
         this.id = id;
         this.name = name;
         this.teacher_id = teacher_id;
@@ -32,11 +32,11 @@ public class CourseResponse {
         this.name = name;
     }
 
-    public int getTeacher_id() {
+    public String getTeacher_id() {
         return teacher_id;
     }
 
-    public void setTeacher_id(int teacher_id) {
+    public void setTeacher_id(String teacher_id) {
         this.teacher_id = teacher_id;
     }
 

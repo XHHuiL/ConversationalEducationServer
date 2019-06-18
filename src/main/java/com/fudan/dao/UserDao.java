@@ -25,6 +25,8 @@ public interface UserDao {
 
     User selectByPrimaryKey(Integer id);
 
+    User selectByUUID(String uuid);
+
     int updateByExampleSelective(@Param("record") User record, @Param("example") UserExample example);
 
     int updateByExample(@Param("record") User record, @Param("example") UserExample example);
