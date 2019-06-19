@@ -1,10 +1,13 @@
 package com.fudan.service;
 
 
+import com.fudan.dao.ContentDao;
 import com.fudan.dao.CourseDao;
+import com.fudan.dao.NoteDao;
 import com.fudan.dao.UserConnectCourseDao;
 import com.fudan.entity.Course;
 import com.fudan.entity.CourseExample;
+import com.fudan.entity.Note;
 import com.fudan.entity.UserConnectCourse;
 import org.springframework.stereotype.Service;
 
@@ -15,10 +18,18 @@ public class CourseService {
 
     private final CourseDao courseDao;
     private final UserConnectCourseDao connectDao;
+    private final NoteDao noteDao;
+    private final ChapterService chapterService;
+    private final ContentDao contentDao;
+    private final NoteService noteService;
 
-    public CourseService(CourseDao courseDao, UserConnectCourseDao connectDao) {
+    public CourseService(CourseDao courseDao, UserConnectCourseDao connectDao, NoteDao noteDao, ChapterService chapterService, ContentDao contentDao, NoteService noteService) {
         this.courseDao = courseDao;
         this.connectDao = connectDao;
+        this.noteDao = noteDao;
+        this.chapterService = chapterService;
+        this.contentDao = contentDao;
+        this.noteService = noteService;
     }
 
     public List<Course> getCourses() {
@@ -59,6 +70,14 @@ public class CourseService {
 
     public void drop(UserConnectCourse connect) {
         connectDao.deleteByUserIdAndCourseId(connect);
+        List<Note> notes = noteDao.selectByStudentId(connect.getUserId());
+        for (Note note:notes
+             ) {
+            if (chapterService.getRelevantCourseId(contentDao.selectByPrimaryKey(note.getContentId()).getChapterId()).
+                    equals(connect.getCourseId())){
+                noteService.delete(note.getId());
+            }
+        }
     }
 
     public String getRelevantTeacherId(Integer id){

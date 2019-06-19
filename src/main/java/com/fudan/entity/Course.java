@@ -15,6 +15,8 @@ public class Course implements Serializable {
 
     private String image;
 
+    private String description;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {
@@ -49,6 +51,14 @@ public class Course implements Serializable {
         this.image = image;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -64,7 +74,8 @@ public class Course implements Serializable {
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
             && (this.getTeacherId() == null ? other.getTeacherId() == null : this.getTeacherId().equals(other.getTeacherId()))
-            && (this.getImage() == null ? other.getImage() == null : this.getImage().equals(other.getImage()));
+            && (this.getImage() == null ? other.getImage() == null : this.getImage().equals(other.getImage()))
+            && (this.getDescription() == null ? other.getDescription() == null : this.getDescription().equals(other.getDescription()));
     }
 
     @Override
@@ -75,6 +86,7 @@ public class Course implements Serializable {
         result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
         result = prime * result + ((getTeacherId() == null) ? 0 : getTeacherId().hashCode());
         result = prime * result + ((getImage() == null) ? 0 : getImage().hashCode());
+        result = prime * result + ((getDescription() == null) ? 0 : getDescription().hashCode());
         return result;
     }
 
@@ -88,6 +100,7 @@ public class Course implements Serializable {
         sb.append(", name=").append(name);
         sb.append(", teacherId=").append(teacherId);
         sb.append(", image=").append(image);
+        sb.append(", description=").append(description);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

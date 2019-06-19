@@ -26,6 +26,10 @@ public class ContentService {
         return contentDao.selectByChapterId(id);
     }
 
+    public Integer getRelevantChapterId(Integer id){
+        return contentDao.selectByPrimaryKey(id).getChapterId();
+    }
+
     public String getTeacherHeadSculpture(Integer id) {
         return
                 userService.getHeadSculpture(

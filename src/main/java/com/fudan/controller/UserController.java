@@ -54,8 +54,6 @@ public class UserController {
 
     @PutMapping(value = "/{id}")
     public Map updateInfo(@PathVariable int id, @RequestBody User user) {
-        System.out.println(user.getId());
-        System.out.println(user.getSex());
         if (id != user.getId()) {
             return MapFactory.idMismatchMap();
         }

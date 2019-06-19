@@ -6,13 +6,15 @@ public class CourseResponse {
     private String name;
     private String teacher_id;
     private String image;
+    private String description;
     private int student_num;
 
-    public CourseResponse(int id, String name, String teacher_id, String image, int student_num) {
+    public CourseResponse(int id, String name, String teacher_id, String image, String description, int student_num) {
         this.id = id;
         this.name = name;
         this.teacher_id = teacher_id;
         this.image = image;
+        this.description = description;
         this.student_num = student_num;
     }
 
@@ -54,5 +56,13 @@ public class CourseResponse {
 
     public void setStudent_num(int student_num) {
         this.student_num = student_num;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
