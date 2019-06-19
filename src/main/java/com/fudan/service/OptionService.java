@@ -28,6 +28,8 @@ public class OptionService {
                 ) {
             temp = (char) ('A' + option.getOptionId() - 1) + ". ";
             text.append(temp).append(option.getText()).append("\n");
+            if (option.getIsCorrect())
+                response.setCorrectOption(option.getOptionId());
         }
         response.setText(text.toString());
         return response;

@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.fudan.dao.OptionDao">
-  <resultMap id="BaseResultMap" type="com.fudan.entity.Option">
+<mapper namespace="com.fudan.dao.AnswerDao">
+  <resultMap id="BaseResultMap" type="com.fudan.entity.Answer">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="text" jdbcType="VARCHAR" property="text" />
+    <result column="student_id" jdbcType="VARCHAR" property="studentId" />
     <result column="content_id" jdbcType="INTEGER" property="contentId" />
-    <result column="is_correct" jdbcType="BIT" property="isCorrect" />
-    <result column="option_id" jdbcType="INTEGER" property="optionId" />
+    <result column="selected_option" jdbcType="INTEGER" property="selectedOption" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -67,15 +66,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, `text`, content_id, is_correct, option_id
+    id, student_id, content_id, selected_option
   </sql>
-  <select id="selectByExample" parameterType="com.fudan.entity.OptionExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.fudan.entity.AnswerExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from `option`
+    from answer
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -94,85 +93,70 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from `option`
+    from answer
     where id = #{id,jdbcType=INTEGER}
-  </select>
-  <select id="selectByContentId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from `option`
-    where content_id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from `option`
+    delete from answer
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.fudan.entity.OptionExample">
-    delete from `option``
+  <delete id="deleteByExample" parameterType="com.fudan.entity.AnswerExample">
+    delete from answer
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.fudan.entity.Option" useGeneratedKeys="true">
-    insert into `option` (`text`, content_id, is_correct,
-      option_id)
-    values (#{text,jdbcType=VARCHAR}, #{contentId,jdbcType=INTEGER}, #{isCorrect,jdbcType=BIT}, 
-      #{optionId,jdbcType=INTEGER})
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.fudan.entity.Answer" useGeneratedKeys="true">
+    insert into answer (student_id, content_id, selected_option
+      )
+    values (#{studentId,jdbcType=VARCHAR}, #{contentId,jdbcType=INTEGER}, #{selectedOption,jdbcType=INTEGER}
+      )
   </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.fudan.entity.Option" useGeneratedKeys="true">
-    insert into `option`
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.fudan.entity.Answer" useGeneratedKeys="true">
+    insert into answer
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="text != null">
-        `text`,
+      <if test="studentId != null">
+        student_id,
       </if>
       <if test="contentId != null">
         content_id,
       </if>
-      <if test="isCorrect != null">
-        is_correct,
-      </if>
-      <if test="optionId != null">
-        option_id,
+      <if test="selectedOption != null">
+        selected_option,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="text != null">
-        #{text,jdbcType=VARCHAR},
+      <if test="studentId != null">
+        #{studentId,jdbcType=VARCHAR},
       </if>
       <if test="contentId != null">
         #{contentId,jdbcType=INTEGER},
       </if>
-      <if test="isCorrect != null">
-        #{isCorrect,jdbcType=BIT},
-      </if>
-      <if test="optionId != null">
-        #{optionId,jdbcType=INTEGER},
+      <if test="selectedOption != null">
+        #{selectedOption,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.fudan.entity.OptionExample" resultType="java.lang.Long">
-    select count(*) from `option`
+  <select id="countByExample" parameterType="com.fudan.entity.AnswerExample" resultType="java.lang.Long">
+    select count(*) from answer
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update `option`
+    update answer
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.text != null">
-        `text` = #{record.text,jdbcType=VARCHAR},
+      <if test="record.studentId != null">
+        student_id = #{record.studentId,jdbcType=VARCHAR},
       </if>
       <if test="record.contentId != null">
         content_id = #{record.contentId,jdbcType=INTEGER},
       </if>
-      <if test="record.isCorrect != null">
-        is_correct = #{record.isCorrect,jdbcType=BIT},
-      </if>
-      <if test="record.optionId != null">
-        option_id = #{record.optionId,jdbcType=INTEGER},
+      <if test="record.selectedOption != null">
+        selected_option = #{record.selectedOption,jdbcType=INTEGER},
       </if>
     </set>
     <if test="_parameter != null">
@@ -180,40 +164,35 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update `option`
+    update answer
     set id = #{record.id,jdbcType=INTEGER},
-      `text` = #{record.text,jdbcType=VARCHAR},
+      student_id = #{record.studentId,jdbcType=VARCHAR},
       content_id = #{record.contentId,jdbcType=INTEGER},
-      is_correct = #{record.isCorrect,jdbcType=BIT},
-      option_id = #{record.optionId,jdbcType=INTEGER}
+      selected_option = #{record.selectedOption,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.fudan.entity.Option">
-    update `option`
+  <update id="updateByPrimaryKeySelective" parameterType="com.fudan.entity.Answer">
+    update answer
     <set>
-      <if test="text != null">
-        `text` = #{text,jdbcType=VARCHAR},
+      <if test="studentId != null">
+        student_id = #{studentId,jdbcType=VARCHAR},
       </if>
       <if test="contentId != null">
         content_id = #{contentId,jdbcType=INTEGER},
       </if>
-      <if test="isCorrect != null">
-        is_correct = #{isCorrect,jdbcType=BIT},
-      </if>
-      <if test="optionId != null">
-        option_id = #{optionId,jdbcType=INTEGER},
+      <if test="selectedOption != null">
+        selected_option = #{selectedOption,jdbcType=INTEGER},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.fudan.entity.Option">
-    update `option`
-    set `text` = #{text,jdbcType=VARCHAR},
+  <update id="updateByPrimaryKey" parameterType="com.fudan.entity.Answer">
+    update answer
+    set student_id = #{studentId,jdbcType=VARCHAR},
       content_id = #{contentId,jdbcType=INTEGER},
-      is_correct = #{isCorrect,jdbcType=BIT},
-      option_id = #{optionId,jdbcType=INTEGER}
+      selected_option = #{selectedOption,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
