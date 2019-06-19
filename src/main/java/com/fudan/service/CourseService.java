@@ -10,6 +10,9 @@ import com.fudan.entity.CourseExample;
 import com.fudan.entity.Note;
 import com.fudan.entity.UserConnectCourse;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -52,10 +55,12 @@ public class CourseService {
         return courseDao.offeredCourses(teacherId);
     }
 
+    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.DEFAULT,timeout=36000,rollbackFor=Exception.class)
     public void update(Course course) {
         courseDao.updateByPrimaryKeySelective(course);
     }
 
+    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.DEFAULT,timeout=36000,rollbackFor=Exception.class)
     public void create(Course course) {
         courseDao.insert(course);
     }
@@ -64,10 +69,12 @@ public class CourseService {
         return connectDao.selectByUserIdAndCourseId(connect) != null;
     }
 
+    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.DEFAULT,timeout=36000,rollbackFor=Exception.class)
     public void take(UserConnectCourse connect){
         connectDao.insert(connect);
     }
 
+    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.DEFAULT,timeout=36000,rollbackFor=Exception.class)
     public void drop(UserConnectCourse connect) {
         connectDao.deleteByUserIdAndCourseId(connect);
         List<Note> notes = noteDao.selectByStudentId(connect.getUserId());

@@ -83,12 +83,6 @@ public class CourseController {
         return MapFactory.successMap(MapFactory.CREATE);
     }
 
-    // todo delete course
-    @DeleteMapping(value = "/course/delete")
-    public Map deleteCourse() {
-        return MapFactory.successMap(MapFactory.DELETE);
-    }
-
     @PostMapping(value = "/course/take")
     public Map takeCourse(@RequestBody UserConnectCourse connect) {
         if (connect.getUserId() == null || connect.getCourseId() == null) {

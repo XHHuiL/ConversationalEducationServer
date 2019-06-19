@@ -5,6 +5,9 @@ import com.fudan.dao.NoteDao;
 import com.fudan.entity.Note;
 import com.fudan.response.NoteResponse;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +37,7 @@ public class NoteService {
         return responses;
     }
 
+    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.DEFAULT,timeout=36000,rollbackFor=Exception.class)
     public void create(Note note) {
         noteDao.insert(note);
     }
@@ -42,10 +46,12 @@ public class NoteService {
         return noteDao.selectByPrimaryKey(id);
     }
 
+    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.DEFAULT,timeout=36000,rollbackFor=Exception.class)
     public void update(Note note) {
         noteDao.updateByPrimaryKeySelective(note);
     }
 
+    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.DEFAULT,timeout=36000,rollbackFor=Exception.class)
     public void delete(int id) {
         noteDao.deleteByPrimaryKey(id);
     }
