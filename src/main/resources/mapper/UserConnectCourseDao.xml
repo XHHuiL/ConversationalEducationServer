@@ -95,6 +95,12 @@
     from user_connect_course
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectByCourseId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user_connect_course
+    where course_id = #{id,jdbcType=INTEGER}
+  </select>
   <select id="selectByUserIdAndCourseId" parameterType="com.fudan.entity.UserConnectCourse" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />

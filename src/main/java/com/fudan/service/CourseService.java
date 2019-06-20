@@ -9,11 +9,13 @@ import com.fudan.entity.Course;
 import com.fudan.entity.CourseExample;
 import com.fudan.entity.Note;
 import com.fudan.entity.UserConnectCourse;
+import com.fudan.response.CourseResponse;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -35,8 +37,16 @@ public class CourseService {
         this.noteService = noteService;
     }
 
-    public List<Course> getCourses() {
-        return courseDao.selectByExample(new CourseExample());
+    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.DEFAULT,timeout=36000,rollbackFor=Exception.class)
+    public List<CourseResponse> getCourses() {
+        List<Course> courses = courseDao.selectByExample(new CourseExample());
+        List<CourseResponse> courseResponses = new ArrayList<>();
+        for (Course course :courses
+                ) {
+            int num = connectDao.selectByCourseId(course.getId()).size();
+            courseResponses.add(new CourseResponse(course.getId(), course.getName(), course.getTeacherId(), course.getImage(), course.getDescription(), num));
+        }
+        return courseResponses;
     }
 
     public Course getCourseById(Integer id){

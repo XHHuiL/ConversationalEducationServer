@@ -26,7 +26,7 @@ public class CourseController {
 
     @GetMapping(value = "/course/all")
     public Map allCourses() {
-        return MapFactory.coursesMap(ConvertEntityToResponse.convertCourseList(courseService.getCourses()));
+        return MapFactory.coursesMap(courseService.getCourses());
     }
 
     @GetMapping(value = "/course/selected/{userId}")

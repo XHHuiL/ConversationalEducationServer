@@ -9,6 +9,6 @@ public class UrlBuilder {
     }
 
     public static String urlForToken(){
-        return "http://192.168.1.102:8080/applet-login";
+        return "http://47.102.131.149:80/applet-login";
     }
 }

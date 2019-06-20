@@ -29,6 +29,8 @@ public interface UserConnectCourseDao {
 
     UserConnectCourse selectByUserIdAndCourseId(UserConnectCourse record);
 
+    List<UserConnectCourse> selectByCourseId(Integer id);
+
     int updateByExampleSelective(@Param("record") UserConnectCourse record, @Param("example") UserConnectCourseExample example);
 
     int updateByExample(@Param("record") UserConnectCourse record, @Param("example") UserConnectCourseExample example);
