@@ -41,8 +41,9 @@ public class MapFactory {
         return builder.getMap();
     }
 
-    public static Map contentsMap(String headSculpture, List<Content> contents) {
+    public static Map contentsMap(String name, String headSculpture, List<Content> contents) {
         MapBuilder builder = new MapBuilder();
+        builder.teacherName(name);
         builder.headSculpture(headSculpture);
         builder.contents(contents);
         return builder.getMap();
@@ -123,6 +124,10 @@ public class MapFactory {
 
         private void user(User user) {
             map.put("info", user);
+        }
+
+        private void teacherName(String name){
+            map.put("teacherName", name);
         }
 
         private void headSculpture(String headSculpture) {

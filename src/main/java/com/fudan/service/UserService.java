@@ -27,10 +27,6 @@ public class UserService {
         return userDao.selectByUUID(uuid);
     }
 
-    public String getHeadSculpture(String id) {
-        return userDao.selectByUUID(id).getHeadSculpture();
-    }
-
     @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.DEFAULT,timeout=36000,rollbackFor=Exception.class)
     public void update(User user) {
         userDao.updateByPrimaryKeySelective(user);

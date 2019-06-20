@@ -1,6 +1,7 @@
 package com.fudan.controller;
 
 import com.fudan.entity.Content;
+import com.fudan.entity.User;
 import com.fudan.service.ContentService;
 import com.fudan.util.MapFactory;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -23,8 +24,10 @@ public class ContentController {
 
     @GetMapping(value = "/contents/{chapterId}")
     public Map allContents(@PathVariable Integer chapterId) {
-        String teacherHeadSculpture = contentService.getTeacherHeadSculpture(chapterId);
+        User teacher = contentService.getTeacher(chapterId);
+        String name = teacher.getUsername();
+        String teacherHeadSculpture = teacher.getHeadSculpture();
         List<Content> contents = contentService.getContentsByChapterId(chapterId);
-        return MapFactory.contentsMap(teacherHeadSculpture, contents);
+        return MapFactory.contentsMap(name, teacherHeadSculpture, contents);
     }
 }

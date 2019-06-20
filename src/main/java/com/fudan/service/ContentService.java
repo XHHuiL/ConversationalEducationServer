@@ -2,6 +2,7 @@ package com.fudan.service;
 
 import com.fudan.dao.ContentDao;
 import com.fudan.entity.Content;
+import com.fudan.entity.User;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,13 +27,13 @@ public class ContentService {
         return contentDao.selectByChapterId(id);
     }
 
-    public Integer getRelevantChapterId(Integer id){
+    public Integer getRelevantChapterId(Integer id) {
         return contentDao.selectByPrimaryKey(id).getChapterId();
     }
 
-    public String getTeacherHeadSculpture(Integer id) {
+    public User getTeacher(Integer id) {
         return
-                userService.getHeadSculpture(
+                userService.getUserByUUID(
                         courseService.getRelevantTeacherId(
                                 chapterService.getRelevantCourseId(id)));
     }
